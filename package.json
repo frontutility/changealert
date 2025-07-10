@@ -1,0 +1,32 @@
+{
+  "name": "changealert",
+  "version": "1.0.0",
+  "description": "A lightweight, customizable JavaScript alert and notification library.",
+  "main": "dist/changealert.min.js",
+  "style": "dist/changealert.min.css",
+  "types": "changealert.d.ts",    
+  "files": [
+    "dist",
+    "README.md",
+    "changealert.d.ts"          
+  ],
+  "keywords": [
+    "changealert",
+    "toast",
+    "alert",
+    "notification",
+    "popup",
+    "message",
+    "custom alert"
+  ],
+  "homepage": "https://github.com/rajkumarnimod/changealert#readme",
+  "author": "Rajkumar Nimod",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rajkumarnimod/changealert.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rajkumarnimod/changealert/issues"
+  }
+}
