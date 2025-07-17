@@ -1,4 +1,4 @@
-# 🔄 ChangeAlert - A Lightweight, Customizable Notification Library for Modern Web Apps
+# Futoast - A Lightweight, Customizable Toast Notification Library
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -6,86 +6,79 @@
 
 ## Overview
 
-**ChangeAlert** provides beautiful, responsive alerts with 8 themes, dark/light mode, animations, and sound effects. Easily customizable with simple API calls. Perfect for form validations, system alerts, and user notifications. Works across all devices and browsers.
-
+**Futoast** is a lightweight and customizable JavaScript alert & toast notification library. Easily show success, error, info, or loading messages with rich UI options, animation, and full control. Perfect for frontend developers who want beautiful, non-blocking notifications.
 
 ## 📦 Installation
 
 ### Via CDN (Easiest)
 
 ```html
-<!-- In your HTML <head> -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rajkumarnimod/changealert/dist/changealert.min.css">
-
 <!-- Just before </body> -->
-<script src="https://cdn.jsdelivr.net/gh/rajkumarnimod/changealert/dist/changealert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/futoast@3.1.0/dist/futoast.min.js"></script>
 ```
 
 ### Via NPM (Recommended for Modern Projects)
+
 ```bash
-npm install changealert
-```
-- Then import it in your JavaScript:
-
-### For Webpack/Vite/ESM:
-```js
-import 'changealert/dist/changealert.min.css';
-import ChangeAlert from 'changealert';
+npm install futoast
 ```
 
-### For CommonJS:
+### Via Yarn
 
-```js
-require('changealert/dist/changealert.min.css');
-const ChangeAlert = require('changealert');
+```bash
+yarn add futoast
 ```
-
-## 🛠️ How It Works
-
-ChangeAlert works by dynamically injecting notification elements into your webpage. When triggered, it creates alert divs with your message, applies selected themes/animations, and positions them on screen. The `library` manages multiple alerts through a queue system, automatically handling show/hide transitions. Features like progress bars, sounds, and callbacks are processed through an optimized event system. It uses pure JavaScript with zero dependencies, ensuring fast performance across all browsers.
 
 ---
 
 ## ✅ Key Features
 
-- 8 Color Themes (Success, Error, Info, etc.)
-- Light/Dark/Auto Modes
-- 9 Entrance Animations
-- 6 Screen Positions
-- Sound Effects for Alerts
-- HTML or Plain Text Support
-- Auto Close Timer + Progress Bars
-- Custom Action Buttons
-- Fully Responsive (Mobile-Friendly)
-- RTL Text Support
-- Callbacks (onShow, onClick, onClose, onTimeout)
-- Works in Vanilla JS, React, Vue, Angular
+- 🚀 Lightweight (Only 12kb gzipped)
+- 🌈 Customizable themes (Light/Dark mode support)
+- 🎨 Multiple notification types (Success, Error, Warning, Info, etc.)
+- 📱 Fully responsive (Works on all device sizes)
+- 🎭 Beautiful animations (10+ built-in animations)
+- ⏳ Progress bar for timed notifications
+- 🖱️ Interactive elements (Buttons, click handlers)
+- 🔔 Sound notifications (Optional)
+- 📦 Framework support (React, Vue, Angular, Django, Vanilla JS)
+- ♿ Accessibility (ARIA compliant)
 
 ---
 
 ## 🛠️ Usage Examples
 
 ### Simple Alert
-```html
-ChangeAlert.success("File uploaded successfully!");
 
-// Demo Buttons 
-<button onclick="ChangeAlert.primary('Primary Alert')"> Primary </button>
-<button onclick="ChangeAlert.secondary('Secondary Alert')"> Secondary </button>
-<button onclick="ChangeAlert.success('Success!')"> Success </button>
-<button onclick="ChangeAlert.error('Error!')"> Error </button>
-<button onclick="ChangeAlert.warning('Warning!')"> Warning </button>
-<button onclick="ChangeAlert.info('Info!')"> Info </button>
-<button onclick="ChangeAlert.question('Are you sure?')"> Question </button>
-<button onclick="ChangeAlert.loading('Please wait...')"> Loading</button>
+```js
+// Show a simple toast
+Futoast.show("Hello World!");
+
+// Show different types of toasts
+Futoast.success("Operation completed successfully!");
+Futoast.error("Something went wrong!");
+Futoast.warning("This action cannot be undone");
+Futoast.info("New update available");
+
+// Demo Buttons
+<button onclick="Futoast.primary('Primary Alert')"> Primary </button>
+<button onclick="Futoast.secondary('Secondary Alert')"> Secondary </button>
+<button onclick="Futoast.success('Success!')"> Success </button>
+<button onclick="Futoast.error('Error!')"> Error </button>
+<button onclick="Futoast.warning('Warning!')"> Warning </button>
+<button onclick="Futoast.info('Info!')"> Info </button>
+<button onclick="Futoast.question('Are you sure?')"> Question </button>
+<button onclick="Futoast.loading('Please wait...')"> Loading</button>
 ```
+
 ### Custom Alert with Options
 
-```html
-ChangeAlert.error("Login failed!", {
-  timeout: 5000,
+```js
+Futoast.show("Custom toast", {
+  type: "primary",
+  timeout: 3000,
   position: "top-center",
-  animationIn: "bounce"
+  animationIn: "zoomIn",
 });
 ```
 
@@ -94,155 +87,251 @@ ChangeAlert.error("Login failed!", {
 ## 🔧 Options Reference
 
 ```js
-ChangeAlert.info("Custom message", {
-  position: "top-right",     // Alert position on the screen: 'top-left', 'top-center', etc.
-  timeout: 4000,             // Auto-close delay in milliseconds (0 = manual close only)
-  theme: "info",             // Alert type: 'success', 'error', 'info', 'warning'
-  themeMode: "auto",         // Color mode: 'auto', 'light', or 'dark'
-  icon: null,                // Custom icon as HTML, SVG, or image URL
-  closeButton: true,         // Show or hide the close (X) button
-  pauseOnHover: true,        // Pause the timeout countdown when hovered
-  draggable: false,          // Make alert draggable (if supported)
-  progressBar: true,         // Display a visual countdown progress bar
-  sound: false,              // Play sound when alert appears
-  html: false,               // Enable raw HTML content inside alert
-  animationIn: "fadeIn",     // Entry animation
-  animationOut: "fadeOut",   // Exit animation
-  buttons: [                 // Action buttons with custom text and callback
-    { text: "Retry", action: retryFunction }
+// Basic usage with all new options
+Futoast.info("Custom message", {
+  position: "top-right",
+  timeout: 4000,
+  type: "info",
+  themeMode: "auto",
+  icon: "<svg>...</svg>",
+  closeButton: true,
+  pauseOnHover: true,
+  draggable: false,
+  progressBar: true,
+  sound: true,
+  html: false,
+  animationIn: "fadeIn",
+  animationOut: "fadeOut",
+  buttons: [
+    {
+      text: "Retry",
+      action: retryFunction,
+      style: "background: #4CAF50;",
+      class: "retry-btn",
+    },
   ],
-  onShow: () => console.log("Alert appeared"),     // Triggered when alert is shown
-  onClick: (e) => saveChanges(),                   // Triggered when alert is clicked
-  onClose: () => console.log("Alert closed"),      // Triggered when alert is manually closed
-  onTimeout: () => autoSave()                      // Triggered when alert closes due to timeout
+  onShow: () => console.log("Alert appeared"),
+  onClick: (e) => saveChanges(),
+  onClose: () => console.log("Alert closed"),
+  onTimeout: () => autoSave(),
+});
+
+// Auto dark/light mode detection
+Futoast.success("Theme detected automatically", {
+  themeMode: "auto",
+});
+
+// With custom sound
+Futoast.error("Critical error!", {
+  sound: true,
+  customSound: "/sounds/alert.mp3",
+});
+
+// With action buttons
+Futoast.show("Confirm deletion?", {
+  buttons: [
+    { text: "Cancel", action: () => {} },
+    { text: "Delete", action: deleteItem, style: "background: #f44336;" },
+  ],
+  timeout: 0, // Requires manual close
 });
 ```
 
 ---
 
-##  Animation Types
+## Animation Types
 
 ```js
 // Available animations:
-fadeIn, fadeOut, zoomIn, slideInRight, slideInLeft,
-bounce, flip, pulse, spin
+futoast-fadeIn ,futoast-fadeOut ,futoast-zoomIn ,futoast-slideInRight ,futoast-slideInLeft ,futoast-bounce ,futoast-flip ,futoast-pulse ,futoast-spinner
 ```
 
-// Usage:
+---
+
+## 🚀 Toast Methods
+
+| Method      | Description                  | Example                             |
+|-------------|------------------------------|-------------------------------------|
+| `show()`    | Show a basic toast           | `Futoast.show("Hello")`             |
+| `primary()` | Primary style toast          | `Futoast.primary("Info")`           |
+| `success()` | Success style toast          | `Futoast.success("Done!")`          |
+| `error()`   | Error style toast            | `Futoast.error("Failed!")`          |
+| `warning()` | Warning style toast          | `Futoast.warning("Careful!")`       |
+| `info()`    | Info style toast             | `Futoast.info("FYI")`               |
+| `question()`| Question style toast         | `Futoast.question("Sure?")`         |
+| `loading()` | Loading indicator (no timeout)| `Futoast.loading("Processing...")` |
+| `clear()`   | Remove all toasts            | `Futoast.clear()`                   |
+
+---
+
+## ⚙️ Configuration Options
+
+| Option           | Type      | Default                  | Description |
+|------------------|-----------|--------------------------|-------------|
+| `position`        | `string`  | `'top-right'`            | Position of toast (e.g. `top-right`, `bottom-center`) |
+| `timeout`         | `number`  | `5000`                   | Auto-close time in ms (`0` = no timeout) |
+| `type`            | `string`  | `'primary'`              | Toast type |
+| `theme`           | `string`  | `'light'`                | `light` or `dark` theme |
+| `icon`            | `string`  | `null`                   | Custom icon (text, HTML, or image URL) |
+| `closeButton`     | `boolean` | `true`                   | Show close button |
+| `pauseOnHover`    | `boolean` | `true`                   | Pause timer on hover |
+| `draggable`       | `boolean` | `false`                  | Allow drag to dismiss |
+| `progressBar`     | `boolean` | `true`                   | Show progress bar |
+| `sound`           | `boolean` | `false`                  | Play sound |
+| `html`            | `boolean` | `false`                  | Enable HTML in message |
+| `animationIn`     | `string`  | `'fadeIn'`               | Show animation (`fadeIn`, `zoomIn`, etc.) |
+| `animationOut`    | `string`  | `'fadeOut'`              | Hide animation (`fadeOut`, `zoomOut`) |
+| `onClick`         | `function`| `null`                   | Click event handler |
+| `onClose`         | `function`| `null`                   | Called when toast closes |
+| `onShow`          | `function`| `null`                   | Called when toast shows |
+| `onTimeout`       | `function`| `null`                   | Called on timeout |
+| `rtl`             | `boolean` | `false`                  | Enable RTL layout |
+| `css`             | `string`  | `''`                     | Extra inline CSS |
+| `queue`           | `boolean` | `true`                   | Queue multiple toasts |
+| `zIndex`          | `number`  | `999999`                 | z-index for toast |
+| `overlay`         | `boolean` | `false`                  | Show overlay |
+| `overlayClose`    | `boolean` | `false`                  | Click overlay to close |
+| `overlayColor`    | `string`  | `'rgba(0,0,0,0.5)'`       | Overlay color |
+| `customIcon`      | `string`  | `null`                   | Custom HTML icon |
+| `customSound`     | `string`  | `null`                   | URL for custom sound |
+| `buttons`         | `array`   | `null`                   | Action buttons on toast |
+| `focus`           | `boolean` | `true`                   | Autofocus toast |
+| `fontFamily`      | `string`  | `''`                     | Custom font family |
+| `fontSize`        | `string`  | `''`                     | Custom font size |
+| `maxWidth`        | `string`  | `'350px'`                | Max toast width |
+| `minWidth`        | `string`  | `'300px'`                | Min toast width |
+| `mobilePosition`  | `string`  | `'top'`                  | Mobile toast position (`top`, `bottom`, `same`) |
+| `mobileMaxWidth`  | `string`  | `'90%'`                  | Max mobile toast width |
+| `mobileMinWidth`  | `string`  | `'80%'`                  | Min mobile toast width |
+| `ariaLive`        | `string`  | `'assertive'`            | ARIA live (`polite`, `assertive`, `off`) |
+
+---
+
+## 🛠️ Utility Methods
+
+| Method             | Description                              | Example |
+|--------------------|------------------------------------------|---------|
+| `applyTheme()`     | Apply custom theme colors                | `Futoast.applyTheme({ primary: '#ff0000' })` |
+| `setIcons()`       | Set default icons                        | `Futoast.setIcons({ success: '✔️' })` |
+| `setThemeMode()`   | Set dark/light mode                      | `Futoast.setThemeMode('dark')` |
+| `setFont()`        | Set custom font                          | `Futoast.setFont('Roboto', '14px')` |
+
+---
+
+## Advanced Examples
+
+### Custom Theme
 ```js
-ChangeAlert.info("Watch this animation", {
-  animationIn: "flip",
-  animationOut: "zoomOut"
+Futoast.applyTheme({
+  primary: '#4a6bdf',
+  success: '#3ac569',
+  error: '#f54242',
+  warning: '#f5a742',
+  info: '#42b0f5',
+  bg: '#ffffff',
+  text: '#2d3748'
+});
+
+Futoast.setThemeMode('dark'); 
+```
+### Action Buttons
+```js
+Futoast.show("Item deleted", {
+  type: 'error',
+  buttons: [
+    {
+      text: 'Undo',
+      action: () => undoDelete(),
+      style: 'background: #4a6bdf; color: white;',
+      closeOnClick: false
+    },
+    {
+      text: 'Dismiss',
+      action: () => {},
+      class: 'dismiss-btn'
+    }
+  ]
 });
 ```
-## ⚙️ Framework Integration
+---
+
+## ⚙️ Framework-Specific Usage
 
 ### ✅ HTML
-- Use via <script> and <link> as shown in CDN setup.
+- Use via <script> as shown in CDN setup.
 
 ### ✅ React
-```js
-import 'changealert/dist/changealert.min.css';
-import ChangeAlert from 'changealert';
+```jsx
+import React from 'react';
+import { useFutoast, FutoastContainer } from 'futoast';
 
-ChangeAlert.success("Hello from ChangeAlert!");
-```
-```js
-
-import ChangeAlert from 'changealert';
-function App() {
- 
-  const showAlert = () => {
-    ChangeAlert.success("Hello from ChangeAlert!",{sound:true});
+function MyComponent() {
+  const toast = useFutoast();
+  
+  const handleClick = () => {
+    toast.success("React toast notification!", {
+      timeout: 3000,
+      position: 'top-center'
+    });
   };
-
+  
   return (
     <div>
-      <button onClick={showAlert}>Show Alert</button>
+      <FutoastContainer />
+      <button onClick={handleClick}>Show Toast</button>
     </div>
   );
 }
-
-export default App;
 ```
 ### ✅ Vue
 ```js
-import 'changealert/dist/changealert.min.css';
-import ChangeAlert from 'changealert';
+// main.js
+import Vue from 'vue';
+import Futoast from 'futoast';
 
-ChangeAlert.warning("Vue alert works!");
-```
-
-### ✅ Angular
-```js
-import 'changealert/dist/changealert.min.css';
-declare const ChangeAlert: any;
-
-ChangeAlert.error("Angular alert triggered!");
-```
----
-
-## 🔔 Callbacks & Events
-
-Use callbacks to hook into alert lifecycle.
-
-```js
-ChangeAlert.warning("Unsaved changes!", {
-  onShow: () => console.log("Alert appeared"),
-  onClick: () => saveChanges(),      // Triggered when alert is clicked
-  onClose: () => console.log("Alert closed"),
-  onTimeout: () => autoSave()        // When alert disappears automatically
+Vue.use(Futoast.Vue, {
+  inject: true // Inject $futoast in all components
 });
+
+// Component
+export default {
+  methods: {
+    showToast() {
+      this.$futoast.info('Vue toast!', {
+        position: 'bottom-right'
+      });
+    }
+  }
+}
 ```
 
----
+### Angular
+```ts
+import { Component } from '@angular/core';
+import { Futoast } from 'futoast';
 
-## 📱 Mobile Responsiveness
-> Automatically adjusts for small screens:
-
-- Full-width alerts on mobile
-- Optimized spacing
-- Touch-friendly controls
-
----
-## 🌐 Browser Support
-
-ChangeAlert is rigorously tested across all modern browsers and devices:
-
-| Browser | Version | Mobile Support | Notes |
-|---------|---------|----------------|-------|
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chrome/chrome-original.svg" width="16"> Chrome | 49+ | ✅ Android 5+ | Full functionality |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firefox/firefox-original.svg" width="16"> Firefox | 45+ | ✅ All devices | Best performance |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/safari/safari-original.svg" width="16"> Safari | 9+ | ✅ iOS 9+ | Reduced animations |
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/edge/edge-original.svg" width="16"> Edge | 15+ | ✅ Windows Mobile | Full support |
-
-**Key Notes:**
-- 🚀 **Modern Browsers:** All features work perfectly
-- 🐢 **Legacy Browsers:** Graceful degradation (no animations)
-- 📱 **Mobile:** Touch-optimized and responsive
-- 🔌 **No Polyfills Needed:** Works out-of-the-box
-
-*(Tested via BrowserStack on 100+ device/browser combinations)*
-
----
-
-
-## 🌐 Documentation
-
-👉 **Documentation:** <https://changealert.netlify.app/>
-
----
-
-## 📚 Documentation & Links
-
-- **GitHub:** <https://github.com/rajkumarnimod/changealert>
-- **LinkedIn:** <https://www.linkedin.com/in/rajkumar-nimod>
-
+@Component({
+  selector: 'app-root',
+  template: `
+    <button (click)="showSuccess()">Success</button>
+    <button (click)="showError()">Error</button>
+  `
+})
+export class AppComponent {
+  showSuccess() {
+    Futoast.success('Angular success toast!');
+  }
+  
+  showError() {
+    Futoast.error('Something went wrong!');
+  }
+}
+```
 ---
 
 ## 🏷️ Keywords
 
-`ChangeAlert`, `alert library`, `JavaScript alerts`, `success alert`, `error alert`, `info alert`, `toast message`, `JS notification`, `custom alerts`
+`Futoast`, `toast message`, `JavaScript alerts`, `alert library`, `custom alerts`, `JS notification`, `success alert`, `error alert`, `info alert`, `notification library`, `toast notification`, `UI alerts`, `frontend toast`
 
 ---
 
@@ -270,7 +359,7 @@ MIT License – Free for personal and commercial use.
 
 ## 🌟 Support the Project
 
-If you find ChangeAlert useful:
+If you find Futoast useful:
 
 - ⭐ Star the repo
 - 🗣 Share with fellow developers
